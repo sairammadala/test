@@ -1,18 +1,49 @@
 <html>
     <body>
-        <form action="https://btdqamd2w9.execute-api.us-west-2.amazonaws.com/test" method="post">
-										<div class="form-group">
-											<input type="text" class="form-control" placeholder="Name" id="name" name="name" required>										</div>
-										<div class="form-group">
-											<input type="email" class="form-control" placeholder="Email" id="email" name="email" required>										</div>
-										<div class="form-group">
-											<input type="text" class="form-control" placeholder="Subject" id="subject" name="subject"  required>										</div>
-										<div class="form-group">
-											<textarea id="message" cols="30" rows="7" class="form-control" placeholder="Message" id="message" name="message" required></textarea>
-										</div>
-										<div class="form-group">
-											<!-- <input type="submit" class="btn btn-primary btn-send-message" value="Send Message"> -->
-											<button class="btn btn-primary btn-send-message">send message</button>										</div>
-									</form>        
-    </body>
+	<script>
+		document.getElementById('myForm').addEventListener('submit', function(event) {
+		  event.preventDefault(); // Prevent form submission
+		
+		  // Get form values
+		  var name = document.getElementById('name').value;
+		  var email = document.getElementById('email').value;
+		
+		  // Create JSON object
+		  var formData = {
+		    name: name,
+		    email: email
+		  };
+		
+		  // Convert JSON object to string
+		  var jsonData = JSON.stringify(formData);
+		
+		  // Send JSON data to API using AJAX or fetch
+		  // Example using fetch:
+		  fetch('https://api.example.com/endpoint', {
+		    method: 'POST',
+		    headers: {
+		      'Content-Type': 'application/json'
+		    },
+		    body: jsonData
+		  })
+		  .then(response => response.json())
+		  .then(data => {
+		    // Handle API response
+		    console.log(data);
+		  })
+		  .catch(error => {
+		    // Handle error
+		    console.error(error);
+		  });
+		});
+
+	</script>
+       <form id="myForm">
+	  <label for="name">Name:</label>
+	  <input type="text" id="name" name="name"><br><br>
+	  <label for="email">Email:</label>
+	  <input type="email" id="email" name="email"><br><br>
+	  <input type="submit" value="Submit">
+      </form>
+   </body>
 </html>
