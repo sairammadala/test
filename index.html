@@ -1,49 +1,54 @@
+<!DOCTYPE html>
 <html>
-    <body>
-	<script>
-		document.getElementById('myForm').addEventListener('submit', function(event) {
-		  event.preventDefault(); // Prevent form submission
-		
-		  // Get form values
-		  var name = document.getElementById('name').value;
-		  var email = document.getElementById('email').value;
-		
-		  // Create JSON object
-		  var formData = {
-		    name: name,
-		    email: email
-		  };
-		
-		  // Convert JSON object to string
-		  var jsonData = JSON.stringify(formData);
-		
-		  // Send JSON data to API using AJAX or fetch
-		  // Example using fetch:
-		  fetch('https://btdqamd2w9.execute-api.us-west-2.amazonaws.com/test', {
-		    method: 'POST',
-		    headers: {
-		      'Content-Type': 'application/json'
-		    },
-		    body: jsonData
-		  })
-		  .then(response => response.json())
-		  .then(data => {
-		    // Handle API response
-		    console.log("success");
-		  })
-		  .catch(error => {
-		    // Handle error
-		    console.error("fail");
-		  });
-		});
+<head>
+  <title>HTML Form</title>
+</head>
+<body>
+  <form id="myForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name"><br><br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email"><br><br>
+    <input type="submit" value="Submit">
+  </form>
 
-	</script>
-       <form id="myForm" method="post">
-	  <label for="name">Name:</label>
-	  <input type="text" id="name" name="name"><br><br>
-	  <label for="email">Email:</label>
-	  <input type="email" id="email" name="email"><br><br>
-	  <input type="submit" value="Submit">
-      </form>
-   </body>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('myForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Get form values
+        var name = document.getElementById('name').value;
+        var email = document.getElementById('email').value;
+
+        // Create JSON object
+        var formData = {
+          name: name,
+          email: email
+        };
+
+        // Convert JSON object to string
+        var jsonData = JSON.stringify(formData);
+
+        // Send JSON data to API using fetch
+        fetch('https://btdqamd2w9.execute-api.us-west-2.amazonaws.com/test', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: jsonData
+        })
+        .then(response => response.json())
+        .then(data => {
+          // Handle API response
+          console.log(data);
+        })
+        .catch(error => {
+          // Handle error
+          console.error(error);
+        });
+      });
+    });
+  </script>
+</body>
 </html>
